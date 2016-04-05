@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{35888E6E-B9C8-4286-D649-C98F22EBF1AC}") = "FrogWars", "Assembly-CSharp.csproj", "{7CC2282F-0275-8ECD-B895-848B31DE7F6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CC2282F-0275-8ECD-B895-848B31DE7F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC2282F-0275-8ECD-B895-848B31DE7F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC2282F-0275-8ECD-B895-848B31DE7F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC2282F-0275-8ECD-B895-848B31DE7F6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
