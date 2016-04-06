@@ -6,6 +6,7 @@ public class ResourceManager : MonoBehaviour {
 
     public Text _moneyText;
     public Text buyingText;
+    public Text generalInfo;
     private GameManager gameManager;
     private UnitManager unitManager;
 
@@ -40,19 +41,25 @@ public class ResourceManager : MonoBehaviour {
         {
             if (gameManager.isPlayerOnesTurn && player1Money >= 1 || !gameManager.isPlayerOnesTurn && player2Money >= 1)
             {
-                //Plays the unit on selected field
-                if (unitManager.spawnUnit(frogType, tile))
+                //Checks if the player spawns the frog in base.
+                if (gameManager.isPlayerOnesTurn && tile.GetComponentInChildren<MeshRenderer>().material.name.Contains("Player1_glow")
+                    || !gameManager.isPlayerOnesTurn && tile.GetComponentInChildren<MeshRenderer>().material.name.Contains("player2_glow"))
                 {
-                    if (gameManager.isPlayerOnesTurn)
+                    //Plays the unit on selected field
+                    if (unitManager.spawnUnit(frogType, tile))
                     {
-                        player1Money--;
+                        if (gameManager.isPlayerOnesTurn)
+                        {
+                            player1Money--;
+                        }
+                        else
+                        {
+                            player2Money--;
+                        }
+                        buyingText.text = "";
                     }
-                    else
-                    {
-                        player2Money--;
-                    }
-                    buyingText.text = "";
                 }
+                else { generalInfo.text = "Dit is niet het spawnveld"; }          
             }
             else { buyingText.text = "Niet genoeg geld"; }
         }
@@ -60,19 +67,25 @@ public class ResourceManager : MonoBehaviour {
         {
             if (gameManager.isPlayerOnesTurn && player1Money >= 2 || !gameManager.isPlayerOnesTurn && player2Money >= 2)
             {
-                //Plays the unit on selected field
-                if (unitManager.spawnUnit(frogType, tile))
+                //Checks if the player spawns the frog in base.
+                if (gameManager.isPlayerOnesTurn && tile.GetComponentInChildren<MeshRenderer>().material.name.Contains("Player1_glow")
+                    || !gameManager.isPlayerOnesTurn && tile.GetComponentInChildren<MeshRenderer>().material.name.Contains("player2_glow"))
                 {
-                    if (gameManager.isPlayerOnesTurn)
+                    //Plays the unit on selected field
+                    if (unitManager.spawnUnit(frogType, tile))
                     {
-                        player1Money -= 2;
+                        if (gameManager.isPlayerOnesTurn)
+                        {
+                            player1Money-= 2;
+                        }
+                        else
+                        {
+                            player2Money-= 2;
+                        }
+                        buyingText.text = "";
                     }
-                    else
-                    {
-                        player2Money -= 2;
-                    }
-                    buyingText.text = "";
                 }
+                else { generalInfo.text = "Dit is niet het spawnveld"; }
             }
             else { buyingText.text = "Niet genoeg geld"; }
         }
@@ -80,19 +93,25 @@ public class ResourceManager : MonoBehaviour {
         {
             if (gameManager.isPlayerOnesTurn && player1Money >= 2 || !gameManager.isPlayerOnesTurn && player2Money >= 2)
             {
-                //Plays the unit on selected field
-                if (unitManager.spawnUnit(frogType, tile))
+                //Checks if the player spawns the frog in base.
+                if (gameManager.isPlayerOnesTurn && tile.GetComponentInChildren<MeshRenderer>().material.name.Contains("Player1_glow")
+                    || !gameManager.isPlayerOnesTurn && tile.GetComponentInChildren<MeshRenderer>().material.name.Contains("player2_glow"))
                 {
-                    if (gameManager.isPlayerOnesTurn)
+                    //Plays the unit on selected field
+                    if (unitManager.spawnUnit(frogType, tile))
                     {
-                        player1Money -= 2;
+                        if (gameManager.isPlayerOnesTurn)
+                        {
+                            player1Money-= 2;
+                        }
+                        else
+                        {
+                            player2Money-= 2;
+                        }
+                        buyingText.text = "";
                     }
-                    else
-                    {
-                        player2Money -= 2;
-                    }
-                    buyingText.text = "";
                 }
+                else { generalInfo.text = "Dit is niet het spawnveld"; }
             }
             else { buyingText.text = "Niet genoeg geld"; }
         }

@@ -156,14 +156,22 @@ public class UnitManager : MonoBehaviour {
             }
             else
             {
-                //Clears all lit fields
-                tileManager.clearMovableFields();
+                if (tile.GetComponentInChildren<MeshRenderer>().material.name.Contains("bad_glow"))
+                {
+                    _currentText.text = "Dat is water meneertje!";
+                }
+                else
+                {
+                    //Clears all lit fields
+                    tileManager.clearMovableFields();
 
-                Vector3 newPosition = new Vector3(tile.GetComponent<Transform>().position.x, tile.GetComponent<Transform>().position.y + 1, tile.GetComponent<Transform>().position.z);
-                currentSelctedUnit.transform.position = newPosition;
-                togglePlayerColor(currentSelctedUnit, "base");
-                currentSelctedUnit = null;
-                cameraScript.nextPlayer();
+                    //New position and ending turn
+                    Vector3 newPosition = new Vector3(tile.GetComponent<Transform>().position.x, tile.GetComponent<Transform>().position.y + 1, tile.GetComponent<Transform>().position.z);
+                    currentSelctedUnit.transform.position = newPosition;
+                    togglePlayerColor(currentSelctedUnit, "base");
+                    currentSelctedUnit = null;
+                    cameraScript.nextPlayer();
+                }
             }          
         }
     }
