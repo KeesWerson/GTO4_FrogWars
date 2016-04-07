@@ -162,15 +162,42 @@ public class UnitManager : MonoBehaviour {
                 }
                 else
                 {
-                    //Clears all lit fields
-                    tileManager.clearMovableFields();
+                    Vector3 position = tile.GetComponent<Transform>().position;
+                    position.y += 1;
+                    GameObject attackedFrog = null;
+                    //Checks if the player would land on a frog of his own
+                    if(gameManager.isPlayerOnesTurn && findFroggyOnField(gameManager.player1_Units, position) != null
+                        || !gameManager.isPlayerOnesTurn && findFroggyOnField(gameManager.player2_Units, position) != null)
+                    {
+                        _currentText.text = "Dat is je eigen kikker, knuppel...";
+                    }
+                    else
+                    {
+                        //Checks if the player lands on an oponents frog
+                        if (gameManager.isPlayerOnesTurn)
+                        {
+                            attackedFrog = findFroggyOnField(gameManager.player2_Units, position);
+                        }
+                        else
+                        {
+                            attackedFrog = findFroggyOnField(gameManager.player1_Units, position);
+                        }
+                        if (attackedFrog != null)
+                        {
+                            Debug.Log("KIIIIIILLLLLL");
+                            attackedFrog.GetComponent<Unit>().dieInPeace();
+                        }
 
-                    //New position and ending turn
-                    Vector3 newPosition = new Vector3(tile.GetComponent<Transform>().position.x, tile.GetComponent<Transform>().position.y + 1, tile.GetComponent<Transform>().position.z);
-                    currentSelctedUnit.transform.position = newPosition;
-                    togglePlayerColor(currentSelctedUnit, "base");
-                    currentSelctedUnit = null;
-                    cameraScript.nextPlayer();
+                        //Clears all lit fields
+                        tileManager.clearMovableFields();
+
+                        //New position and ending turn
+                        Vector3 newPosition = new Vector3(tile.GetComponent<Transform>().position.x, tile.GetComponent<Transform>().position.y + 1, tile.GetComponent<Transform>().position.z);
+                        currentSelctedUnit.transform.position = newPosition;
+                        togglePlayerColor(currentSelctedUnit, "base");
+                        currentSelctedUnit = null;
+                        cameraScript.nextPlayer();
+                    }                
                 }
             }          
         }
@@ -235,7 +262,7 @@ public class UnitManager : MonoBehaviour {
         {
             if (frog.GetComponent<Transform>().position == field)
             {
-                Debug.Log("DIRECT HIT ON " + frog.name);
+                Debug.Log("FOUND YOU " + frog.name);
                 return frog;
             }
         }

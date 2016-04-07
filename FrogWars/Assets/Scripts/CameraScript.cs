@@ -6,6 +6,11 @@ public class CameraScript : MonoBehaviour {
     public GameManager gameManager;
     private ResourceManager resourceManager;
 
+    private Vector3 player1_lastPosition = new Vector3();
+    private Vector3 player2_lastPosition = new Vector3();
+
+    private bool isFirstRound = true;
+
     public float cameraSpeed;
 
 	// Use this for initialization
@@ -75,14 +80,27 @@ public class CameraScript : MonoBehaviour {
         Debug.Log("NEXTPLAYAAR");
         if (gameManager.isPlayerOnesTurn)
         {
-            transform.position = (new Vector3(gameManager.fieldLenght + 1, 4, gameManager.fieldLenght + 1));
+            //Saving last position
+            player1_lastPosition = gameObject.transform.position;
+            if (isFirstRound)
+            {
+                transform.position = (new Vector3(gameManager.fieldLenght + 1, 4, gameManager.fieldLenght + 1));
+                isFirstRound = false;
+            }
+            else
+            {
+                transform.position = player2_lastPosition;
+            }
             transform.rotation = Quaternion.Euler(30, 225, 0);
             gameManager.isPlayerOnesTurn = false;
             Debug.Log("After player ones turn: " + gameManager.isPlayerOnesTurn);
         }
         else
         {
-            transform.position = (new Vector3(-2, 4, -2));
+            //Saving last position
+            player2_lastPosition = gameObject.transform.position;
+            //transform.position = (new Vector3(-2, 4, -2));   
+            transform.position = player1_lastPosition;
             transform.rotation = Quaternion.Euler(30, 45, 0);
             gameManager.isPlayerOnesTurn = true;
             Debug.Log("After player twos turn: " + gameManager.isPlayerOnesTurn);
